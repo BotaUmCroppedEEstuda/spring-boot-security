@@ -40,6 +40,7 @@ $ maven clean install
 
 Vamos criar a classe:
 
+{% gist c0541274bcfd2d4317a13067a6e333af %}
 <script src="https://gist.github.com/tiiamati/c0541274bcfd2d4317a13067a6e333af.js"></script>
 
 Entendendo as configs:
