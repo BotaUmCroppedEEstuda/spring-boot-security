@@ -160,14 +160,16 @@ O endpoint que contem a string "teste" não precisa estar autenticado, pois na n
 
 Estamos rodando o projeto na porta 8080, sendo assim, abra o postman e tente acessar **http://localhost:8080/hoje** sem passar nenhum tipo de autenticação:
 
-<div style="position: relative; padding-bottom: 53.59375000000001%; height: 0;"><iframe src="https://www.loom.com/embed/4a0fa307f8e6492e85987e92040ab188" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe></div>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/vdbH08M/ezgif-com-gif-maker.gif" alt="ezgif-com-gif-maker" border="0" /></a>
 
 Você vai tomar um erro 401 Unauthorized. 
 
 Agora, selecione a autenticação _Basic Auth_, preencha com os valores que você setou no arquivo **application.yaml** e envie a requisição novamente:
 
-<img src="https://i.picasion.com/pic92/45336db98e5b2ba58a9795ce01f1bf6a.gif" width="300" height="199" border="0" alt="https://picasion.com/" /></a><br />
- 
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/zs45hwn/ezgif-com-gif-maker.gif" alt="ezgif-com-gif-maker" border="0"></a>
+
 Vamos remover a autenticação, e fazer uma requisição no endpoint **http://localhost:8080/teste/hoje**
 
-<img src="https://i.picasion.com/pic92/1f306b284cbb41498b6cfaf51441e306.gif" width="300" height="198" border="0" alt="https://picasion.com/" /></a><br />
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/hR2dPss/ezgif-com-gif-maker.gif" alt="ezgif-com-gif-maker" border="0"></a>
+
+Concluimos o dia 13/04/2022.
