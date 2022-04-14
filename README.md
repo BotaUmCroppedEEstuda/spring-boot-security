@@ -40,8 +40,39 @@ $ maven clean install
 
 Vamos criar a classe:
 
-{% gist c0541274bcfd2d4317a13067a6e333af %}
-<script src="https://gist.github.com/tiiamati/c0541274bcfd2d4317a13067a6e333af.js"></script>
+```bash
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    private BasicAuthConfig basicAuthConfig;
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/teste/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+    }
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser(basicAuthConfig.getUsername())
+                .password("{noop}".concat(basicAuthConfig.getPassword()))
+                .roles("USER");
+    }
+}
+```
 
 Entendendo as configs:
 - **_@Configuration_**: annotation indicates that a class declares one or more @Bean methods and may be processed by the Spring container to generate bean definitions and service requests for those beans at runtime. Since spring 2, we were writing our bean configurations to xml files
@@ -63,7 +94,19 @@ Entendendo as configs:
 
 Vamos criar a classe:
 
-<script src="https://gist.github.com/tiiamati/2c3951cadbaf53972b850173a77dd3e6.js"></script>
+```bash
+import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
+
+@Data
+@Component
+@ConfigurationProperties(prefix = "security")
+public class BasicAuthConfig {
+    private String username;
+    private String password;
+}
+```
 
 Entendendo as configs:
 
@@ -86,7 +129,26 @@ Agora vamos expor um endpoint para testar nossa autenticação.
 
 Vamos criar a classe:
 
-<script src="https://gist.github.com/tiiamati/32d1eb97698de9d5092da731850fa1d3.js"></script>
+```bash
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class Controller {
+
+    @GetMapping("/{name}")
+    public ResponseEntity<String> getName(@PathVariable("name") String name) {
+        return ResponseEntity.ok(name);
+    }
+
+    @GetMapping("/teste/{name}")
+    public ResponseEntity<String> getNameTeste(@PathVariable("name") String name) {
+        return ResponseEntity.ok(name);
+    }
+}
+```
 
 Criamos dois endpoints:
 - http://localhost:8080/{name}
